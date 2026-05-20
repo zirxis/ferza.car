@@ -32,6 +32,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         /* Background Graphic Elements */
@@ -64,31 +65,17 @@
             transform: scale(1.03);
         }
 
-        .tagline {
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--accent-red);
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
         /* Main Container */
         .container {
-            max-width: 1200px;
-            margin: 0 auto cubic-bezier(0.1, 0.7, 1.0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 20px;
             align-items: start;
             animation: fadeIn 1.2s ease;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
+            width: 100%;
         }
 
         /* Info Cards */
@@ -118,7 +105,7 @@
             background: var(--accent-red);
             transform: scaleY(0);
             transition: var(--transition);
-            origin: bottom;
+            transform-origin: bottom;
         }
 
         .card:hover::before {
@@ -167,114 +154,16 @@
             padding-left: 5px;
         }
 
-        /* Interactive Form */
-        .form-section {
-            background: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-        .form-section h2 {
-            color: var(--pure-white);
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .input-group input, 
-        .input-group textarea {
-            width: 100%;
-            padding: 12px 5px;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid #333;
-            color: var(--pure-white);
-            font-size: 16px;
-            outline: none;
-            transition: var(--transition);
-            resize: none;
-        }
-
-        .input-group label {
-            position: absolute;
-            left: 5px;
-            top: 12px;
-            color: #666;
-            transition: var(--transition);
-            pointer-events: none;
-        }
-
-        /* Dynamic Form Labels Interaction */
-        .input-group input:focus ~ label,
-        .input-group input:valid ~ label,
-        .input-group textarea:focus ~ label,
-        .input-group textarea:valid ~ label {
-            top: -12px;
-            font-size: 12px;
-            color: var(--accent-red);
-            font-weight: 600;
-        }
-
-        .input-group input:focus, 
-        .input-group textarea:focus {
-            border-bottom-color: var(--accent-red);
-        }
-
-        /* Modern Button */
-        .submit-btn {
-            background: transparent;
-            color: var(--pure-white);
-            border: 2px solid var(--accent-red);
-            padding: 15px 35px;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 30px;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            transition: var(--transition);
-            width: 100%;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--accent-red);
-            z-index: -1;
-            transition: var(--transition);
-        }
-
-        .submit-btn:hover::before {
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
-        }
-
-        /* Social Media Icons */
+        /* --- تعديل أيقونات التواصل الاجتماعي فقط --- */
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 20px; /* زيادة المسافة بين الدوائر */
             margin-top: 10px;
         }
 
         .social-icons a {
-            width: 40px;
-            height: 40px;
+            width: 55px; /* تكبير الدائرة الخرجية */
+            height: 55px; /* تكبير الدائرة الخارجية */
             border-radius: 50%;
             background: #222;
             display: flex;
@@ -285,30 +174,15 @@
             transition: var(--transition);
         }
 
+        /* تكبير حجم الأيقونة نفسها بالداخل */
+        .social-icons a i {
+            font-size: 1.8em; 
+        }
+
         .social-icons a:hover {
             background: var(--accent-red);
             color: var(--pure-white);
             transform: translateY(-3px);
-        }
-
-        /* Notification Toast */
-        #toast {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #107c41;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 1000;
-        }
-
-        #toast.show {
-            bottom: 30px;
         }
 
         /* Footer */
@@ -319,6 +193,7 @@
             letter-spacing: 1px;
             color: #555;
             border-top: 1px solid #111;
+            width: 100%;
         }
 
         /* Animations */
@@ -338,12 +213,15 @@
         <div class="logo-container">
             <img src="logo.jpg" alt="Ferza Car Logo">
         </div>
-       
+    </header>
+
+    <div class="container">
+        <div class="info-section">
             <div class="card">
                 <h2><i class="fa-solid fa-address-book"></i> Direct Contact</h2>
                 <div class="contact-item">
                     <i class="fa-solid fa-phone" style="color: var(--accent-red);"></i>
-                    <a href="tel:+1234567890">0671589117</a>
+                    <a href="tel:0671589117">0671589117</a>
                 </div>
                 <div class="contact-item">
                     <i class="fa-solid fa-envelope" style="color: var(--accent-red);"></i>
@@ -354,42 +232,17 @@
             <div class="card">
                 <h2><i class="fa-solid fa-share-nodes"></i> Follow the Ride</h2>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/ferza_car"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61589110509224&rdid=ZexGQVb2MQOWk6OO&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1U9DxY8L2Y%2F#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@ferza_car"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/ferza_car" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61589110509224&rdid=ZexGQVb2MQOWk6OO&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1U9DxY8L2Y%2F#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@ferza_car" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
                 </div>
             </div>
-
         </div>
-
-       
-
-    <div id="toast"><i class="fa-solid fa-circle-check"></i> Thank you! Our team will contact you shortly.</div>
+    </div>
 
     <footer>
         &copy; 2026 Ferza Car. All Rights Reserved. Crafted for Performance.
     </footer>
 
-    <script>
-        function handleFormSubmit(event) {
-            event.preventDefault(); // Stop page reload
-            
-            // Get values just to demonstrate action
-            const name = document.getElementById('name').value;
-            
-            // Show Success Notification Toast
-            const toast = document.getElementById('toast');
-            toast.textContent = `Thank you, ${name}! Inquiry sent successfully.`;
-            toast.classList.add('show');
-            
-            // Reset Form Fields
-            document.getElementById('contactForm').reset();
-            
-            // Hide notification after 4 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
-        }
-    </script>
 </body>
 </html>
