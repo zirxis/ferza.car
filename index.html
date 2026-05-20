@@ -9,11 +9,12 @@
     
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #141414;
-            --accent-red: #e50914;
-            --text-silver: #cfcfcf;
-            --pure-white: #ffffff;
+            --bg-color: #f7f9fa;       /* خلفية الصفحة الفاتحة */
+            --card-bg: #ffffff;        /* خلفية الكارد البيضاء */
+            --border-color: #e1e8ed;   /* لون الحدود الفاتح */
+            --accent-red: #e50914;     /* اللون الأحمر المميز للتفاعل */
+            --text-dark: #1a1a1a;       /* لون النص الأساسي الداكن */
+            --text-muted: #657786;     /* لون النص الفرعي */
             --transition: all 0.3s ease;
         }
 
@@ -26,16 +27,17 @@
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-silver);
+            color: var(--text-dark);
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             position: relative;
         }
 
-        /* Background Graphic Elements */
+        /* Background Graphic Elements - تم تعديلها لتناسب الخلفية الفاتحة */
         body::before {
             content: '';
             position: absolute;
@@ -43,59 +45,45 @@
             right: -10%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(229,9,20,0.15) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(229,9,20,0.06) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
-        }
-
-        /* Header / Logo Section */
-        header {
-            text-align: center;
-            padding: 40px 20px 20px 20px;
-            animation: fadeInDown 1s ease;
-        }
-
-        .logo-container img {
-            max-width: 280px;
-            height: auto;
-            filter: drop-shadow(0px 4px 20px rgba(229, 9, 20, 0.3));
-            transition: var(--transition);
-        }
-
-        .logo-container img:hover {
-            transform: scale(1.03);
         }
 
         /* Main Container */
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            align-items: start;
             animation: fadeIn 1.2s ease;
             width: 100%;
         }
 
-        /* Info Cards */
-        .info-section {
+        /* Social Icons Section */
+        .social-section {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .card {
+        /* شكل الكارد الفاتح الجديد */
+        .social-card {
             background: var(--card-bg);
-            border: 1px solid #222;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 30px;
-            transition: var(--transition);
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
         }
 
-        .card::before {
+        /* تأثير الخط الأحمر الجانبي عند التمرير */
+        .social-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -108,81 +96,26 @@
             transform-origin: bottom;
         }
 
-        .card:hover::before {
+        .social-card:hover::before {
             transform: scaleY(1);
         }
 
-        .card:hover {
+        .social-card:hover {
             transform: translateY(-5px);
-            border-color: #333;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: #ccd6dd;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            color: var(--text-dark);
         }
 
-        .card h2 {
-            color: var(--pure-white);
-            font-size: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* حجم الأيقونات داخل الكارد وتغيير لونها عند التمرير */
+        .social-card i {
+            font-size: 2.5em;
+            transition: var(--transition);
         }
 
-        .card h2 i {
+        .social-card:hover i {
             color: var(--accent-red);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .contact-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .contact-item a {
-            color: var(--text-silver);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-item a:hover {
-            color: var(--pure-white);
-            padding-left: 5px;
-        }
-
-        /* --- تعديل أيقونات التواصل الاجتماعي فقط --- */
-        .social-icons {
-            display: flex;
-            gap: 20px; /* زيادة المسافة بين الدوائر */
-            margin-top: 10px;
-        }
-
-        .social-icons a {
-            width: 55px; /* تكبير الدائرة الخرجية */
-            height: 55px; /* تكبير الدائرة الخارجية */
-            border-radius: 50%;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-silver);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        /* تكبير حجم الأيقونة نفسها بالداخل */
-        .social-icons a i {
-            font-size: 1.8em; 
-        }
-
-        .social-icons a:hover {
-            background: var(--accent-red);
-            color: var(--pure-white);
-            transform: translateY(-3px);
+            transform: scale(1.1);
         }
 
         /* Footer */
@@ -191,9 +124,10 @@
             padding: 30px 20px;
             font-size: 12px;
             letter-spacing: 1px;
-            color: #555;
-            border-top: 1px solid #111;
+            color: #8898a5;
             width: 100%;
+            position: absolute;
+            bottom: 0;
         }
 
         /* Animations */
@@ -201,42 +135,23 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo.jpg" alt="Ferza Car Logo">
-        </div>
-    </header>
-
     <div class="container">
-        <div class="info-section">
-            <div class="card">
-                <h2><i class="fa-solid fa-address-book"></i> Direct Contact</h2>
-                <div class="contact-item">
-                    <i class="fa-solid fa-phone" style="color: var(--accent-red);"></i>
-                    <a href="tel:0671589117">0671589117</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fa-solid fa-envelope" style="color: var(--accent-red);"></i>
-                    <a href="mailto:Abdoullahmessaoudi6@gmail.com">Abdoullahmessaoudi6@gmail.com</a>
-                </div>
-            </div>
+        <div class="social-section">
+            <a href="https://www.instagram.com/ferza_car" target="_blank" class="social-card">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
 
-            <div class="card">
-                <h2><i class="fa-solid fa-share-nodes"></i> Follow the Ride</h2>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/ferza_car" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61589110509224&rdid=ZexGQVb2MQOWk6OO&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1U9DxY8L2Y%2F#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@ferza_car" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-            </div>
+            <a href="https://www.facebook.com/profile.php?id=61589110509224&rdid=ZexGQVb2MQOWk6OO&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1U9DxY8L2Y%2F#" target="_blank" class="social-card">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="https://www.tiktok.com/@ferza_car" target="_blank" class="social-card">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
         </div>
     </div>
 
